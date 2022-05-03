@@ -1,4 +1,14 @@
+
+
 body{
     background-color: #477148;
 }
 /*Hexcode von der Farbe eines Pokertisches*/
+
+.ChooseButtons{
+    border: none;
+    width: 10cm;
+    height: 10cm;
+    background-color: #2D3047;
+
+}
