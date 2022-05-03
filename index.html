@@ -11,14 +11,16 @@
 </head>
 
 <body>
+<!--Kartendeck besteht aus 48 Karten mit den Symbolen Karo,Herz, Blatt und Pick-->
+
     <div id="Playground">
         <!-- Buttons mit den Funktionen (Hit,Stand,Double Down, Split und surrender )-->
         <div id="PlayerSide"></div>
-        <input class="ChooseButtons" id="HitButton" type="button" value="Hit" onclick="">
-        <input class="ChooseButtons" id="StandButton" type="button" value="Stand">
-        <input class="ChooseButtons" id="DoubleDownButton" type="button" value="Double Down">
-        <input class="ChooseButtons" id="SplitButton" type="button" value="Split">
-        <input class="ChooseButtons" id="SurrenderButton" type="button" value="Surrender">
+        <input class="ChooseButtons" id="HitButton" type="button" value="Hit" onclick="Hit()">
+        <input class="ChooseButtons" id="StandButton" type="button" value="Stand" onclick="Stand()">
+        <input class="ChooseButtons" id="DoubleDownButton" type="button" value="Double Down" onclick="DoubleDown()">
+        <input class="ChooseButtons" id="SplitButton" type="button" value="Split" onclick="Split()">
+        <input class="ChooseButtons" id="SurrenderButton" type="button" value="Surrender" onclick="Surrender()">
         <div id="CroupierSide"></div>
     </div>
 </body>
