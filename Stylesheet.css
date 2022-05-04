@@ -8,6 +8,16 @@ body{
 }
 /*Hexcode von der Farbe eines Pokertisches*/
 
+#Titel{
+font-weight: 700;
+font-size: 60px;
+color: white;
+text-align: center;
+text-shadow: 2px 2px 3px black;
+
+}
+
+
 #Playground{
 margin: 0 auto;
 width: 100%;
@@ -22,6 +32,7 @@ height: 100vh;
 height: 100vh;
 width: 50%;
 position: absolute;
+top: 0;
 }
 
 #CroupierSide{
@@ -40,7 +51,8 @@ height: 100vh;
 width: 5.5cm;
 position: absolute;
 left:calc(50% - 2.75cm);
-top: 0;
+margin-top: 60px;
+
 
 }
 
@@ -48,7 +60,7 @@ top: 0;
 .cardsurface{
 margin-top: 100px;
 margin-left: 400px;
-
+margin-right: 400px;
 
 }
 
@@ -59,7 +71,6 @@ margin-left: 400px;
     background-color: #2D3047;
     border-radius: 5%;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 0.7cm; 
     margin-top: 0.8cm;
     text-shadow: 2px 2px 1.5px black;
