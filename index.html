@@ -6,31 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlackjackApp</title>
     <script defer src="./build/bundle.js"></script>
-    <link rel="Stylesheet" href="Style.css">
+    <link rel="Stylesheet" href="Stylesheet.css">
 
 </head>
 
 <body>
-<!--Kartendeck besteht aus 48 Karten mit den Symbolen Karo,Herz, Blatt und Pick-->
+    <!--Kartendeck besteht aus 48 Karten mit den Symbolen Karo,Herz, Blatt und Pick-->
 
     <div id="Playground">
+        <div id="Titel">BLACKJACK</div>
         <!-- Buttons mit den Funktionen (Hit,Stand,Double Down, Split und surrender )-->
         <div id="PlayerSide">
-            <div class="Card"></div>
-
+            <div class="WertBJ"></div>
+            <div class="cardsurface">
+                <div class="Card"></div>
+            </div>
         </div>
+        <div class="EinsatzSpieler"></div>
+
+
         <div class="Buttons">
-        <button class="ChooseButtons" id="HitButton" type="button" onclick="Hit()">Hit</button>
-        <button class="ChooseButtons" id="StandButton" type="button" onclick="Stand()">Stand</button>
-        <button class="ChooseButtons" id="DoubleDownButton" type="button" onclick="DoubleDown()">Double Down</button>
-        <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
-        <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
+            <button class="ChooseButtons" id="HitButton" type="button" onclick="Hit()">Hit</button>
+            <button class="ChooseButtons" id="StandButton" type="button" onclick="Stand()">Stand</button>
+            <button class="ChooseButtons" id="DoubleDownButton" type="button" onclick="DoubleDown()">Double
+                Down</button>
+            <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
+            <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
         </div>
         <div id="CroupierSide">
-
-
+            <div class="WertBJ"></div>
+            <div class="cardsurface">
+                <div class="Card"></div>
+            </div>
         </div>
     </div>
+
+
 </body>
 
 </html>

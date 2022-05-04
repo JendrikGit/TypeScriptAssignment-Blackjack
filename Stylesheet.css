@@ -13,7 +13,6 @@ margin: 0 auto;
 width: 100%;
 display: absolute;
 height: 100vh;
-flex-direction: column;
 
 }
 
@@ -23,37 +22,48 @@ flex-direction: column;
 height: 100vh;
 width: 50%;
 position: absolute;
-
 }
 
 #CroupierSide{
 
-background-color: antiquewhite;
+
 height: 100vh;
 width: 50%;
 position: absolute;
-
-
+right: 0;
+top: 0;
 }
 
 .Buttons{
 flex-direction: column;
 height: 100vh;
 width: 5.5cm;
-position: relative;
-left:50%;
+position: absolute;
+left:calc(50% - 2.75cm);
+top: 0;
+
+}
+
+
+.cardsurface{
+margin-top: 100px;
+margin-left: 400px;
+
+
 }
 
 .ChooseButtons{
     border: none;
     width: 5.5cm;
-    height: 2.5cm;
+    height: 2.3cm;
     background-color: #2D3047;
     border-radius: 5%;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.7cm; 
     margin-top: 0.8cm;
+    text-shadow: 2px 2px 1.5px black;
+    box-shadow: 1px 1px 2px #000;
  /* display: block;*/
    /* margin-top: 0.5cm;
     margin-left: 0.5cm;*/
@@ -70,15 +80,19 @@ left:50%;
     cursor:pointer;
 }
 
-/*Werte für eine Spielkarte übers Internet*/
+/*Spielkartengröße (Rückseite)*/
 .Card{
     background-color: red;
-    height: 10cm;
-    width: 10cm;
     border: 6px solid white;
     border-radius: 5px;
     box-shadow: 0 0 1px #000;
-    height: 106px;
-    margin: 0 5px;
-    width: 79px;
+    height: 212px;
+    
+    width:158px;
 }
+
+/*
+.WertBJ{
+
+
+}*/
