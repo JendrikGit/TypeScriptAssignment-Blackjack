@@ -15,13 +15,21 @@
 
     <div id="Playground">
         <!-- Buttons mit den Funktionen (Hit,Stand,Double Down, Split und surrender )-->
-        <div id="PlayerSide"></div>
-        <input class="ChooseButtons" id="HitButton" type="button" value="Hit" onclick="Hit()">
-        <input class="ChooseButtons" id="StandButton" type="button" value="Stand" onclick="Stand()">
-        <input class="ChooseButtons" id="DoubleDownButton" type="button" value="Double Down" onclick="DoubleDown()">
-        <input class="ChooseButtons" id="SplitButton" type="button" value="Split" onclick="Split()">
-        <input class="ChooseButtons" id="SurrenderButton" type="button" value="Surrender" onclick="Surrender()">
-        <div id="CroupierSide"></div>
+        <div id="PlayerSide">
+            <div class="Card"></div>
+
+        </div>
+        <div class="Buttons">
+        <button class="ChooseButtons" id="HitButton" type="button" onclick="Hit()">Hit</button>
+        <button class="ChooseButtons" id="StandButton" type="button" onclick="Stand()">Stand</button>
+        <button class="ChooseButtons" id="DoubleDownButton" type="button" onclick="DoubleDown()">Double Down</button>
+        <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
+        <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
+        </div>
+        <div id="CroupierSide">
+
+
+        </div>
     </div>
 </body>
 
