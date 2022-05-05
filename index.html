@@ -17,19 +17,12 @@
         <span id="Titel">BLACKJACK</span>
         <!-- Buttons mit den Funktionen (Hit,Stand,Double Down, Split und surrender )-->
 
-        <div class="Buttons">
-            <button class="ChooseButtons" id="HitButton" type="button" onclick="Hit()">Hit</button>
-            <button class="ChooseButtons" id="StandButton" type="button" onclick="Stand()">Stand</button>
-            <button class="ChooseButtons" id="DoubleDownButton" type="button" onclick="DoubleDown()">Double
-                Down</button>
-            <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
-            <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
-        </div>
+    
 
     <div class="Sides">
         <div class="PlayerSide">
 <span id="PlayerTitel" >Player:</span>
-            <div class="PlayerWertBJ">0</div>
+            <div id="PlayerWertBJ">0</div>
             <div class="Playercardsurface">
                 <div class="Card"></div>
                 
@@ -45,6 +38,21 @@
             </div>
         </div>
     </div>
+
+    <div class="Buttons">
+        <button class="ChooseButtons" id="HitButton" type="button" >Hit</button>
+        <button class="ChooseButtons" id="StandButton" type="button" onclick="Stand()">Stand</button>
+        <button class="ChooseButtons" id="DoubleDownButton" type="button" onclick="DoubleDown()">Double
+            Down</button>
+        <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
+        <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
+    </div>
+
+
+
+
+
+
     </div>
     
 
