@@ -14,16 +14,8 @@
     <!--Kartendeck besteht aus 48 Karten mit den Symbolen Karo,Herz, Blatt und Pick-->
 
     <div id="Playground">
-        <div id="Titel">BLACKJACK</div>
+        <span id="Titel">BLACKJACK</span>
         <!-- Buttons mit den Funktionen (Hit,Stand,Double Down, Split und surrender )-->
-        <div id="PlayerSide">
-            <div class="WertBJ"></div>
-            <div class="cardsurface">
-                <div class="Card"></div>
-            </div>
-        </div>
-        <div class="EinsatzSpieler"></div>
-
 
         <div class="Buttons">
             <button class="ChooseButtons" id="HitButton" type="button" onclick="Hit()">Hit</button>
@@ -33,13 +25,28 @@
             <button class="ChooseButtons" id="SplitButton" type="button" onclick="Split()">Split</button>
             <button class="ChooseButtons" id="SurrenderButton" type="button" onclick="Surrender()">Surrender</button>
         </div>
-        <div id="CroupierSide">
-            <div class="WertBJ"></div>
-            <div class="cardsurface">
+
+    <div class="Sides">
+        <div class="PlayerSide">
+<span id="PlayerTitel" >Player:</span>
+            <div class="PlayerWertBJ">0</div>
+            <div class="Playercardsurface">
+                <div class="Card"></div>
+                
+            </div>
+            <div class="EinsatzSpieler"></div>
+        </div>
+    
+        <div class="CroupierSide">
+            <span id="CroupierTitel" >Dealer:</span>
+            <div class="CroupierWertBJ">0</div>
+            <div class="Croupiercardsurface">
                 <div class="Card"></div>
             </div>
         </div>
     </div>
+    </div>
+    
 
 
 </body>
