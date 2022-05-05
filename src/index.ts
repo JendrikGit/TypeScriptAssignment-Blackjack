@@ -28,14 +28,14 @@ let blackjackgame = {
 
   cards: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
 
-  cardsMap: { "A": [1, 11], "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 10, "Q": 10, "K": 10},
+ // cardsMap: { "A": [1, 11], "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 10, "Q": 10, "K": 10},
 
   isStand: false,
   isTurnsOver: false,
   pressOnce: false,
 
 };
-
+let cardsMap: {[key:string]:number[]} = { "A": [1, 11], "2": [2], "3": [3], "4": [4], "5": [5], "6": [6], "7": [7], "8": [8], "9": [9], "10": [10], "J": [10], "Q": [10], "K": [10]};
 
 
 interface IPlayer { Wertdiv: string, div: string, boxSize: string, score: number };
@@ -108,26 +108,22 @@ document.getElementsByClassName("PlayerWertBJ")
 
 function updateWert(card: string, activePlayer: IPlayer) {
   if (card === "A") {
-    if (activePlayer["score"] + blackjackgame["cardsMap"][card][1] <= 21) {
-      activePlayer["score"] += blackjackgame["cardsMap"][card][1];
+    if (activePlayer["score"] + cardsMap[card][1] <= 21) {
+      activePlayer["score"] += cardsMap[card][1];
     } else {
-      activePlayer["score"] += blackjackgame["cardsMap"][card][0];
+      activePlayer["score"] += cardsMap[card][0];
 
     }
   }
-else if(typeof(card) === string) {
-  activePlayer["score"] += blackjackgame["cardsMap"][card];
-
-}
 
   else {
-    let currentcard = card.toString();
-    console.log(blackjackgame["cardsMap"]);
+  // let currentcard = card.toString();
+   // console.log(blackjackgame["cardsMap"]);
     
    // console.log(blackjackgame.cardsMap["card"]);
     console.log(typeof(card));
-    console.log(typeof(blackjackgame.cardsMap));
-   activePlayer["score"] += blackjackgame["cardsMap"][currentcard];
+    //console.log(typeof(blackjackgame.cardsMap));
+   activePlayer["score"] += cardsMap[card][0];
    // activePlayer["score"] += blackjackgame["cardsMap"][card];
   }
 }
