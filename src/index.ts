@@ -9,6 +9,7 @@ export class Beispiel extends HTMLElement {
   }
 }
 
+//let cardsMap: ;
 let blackjackgame = {
   player: {
     Wertdiv: "#PlayerWertBJ",
@@ -27,7 +28,7 @@ let blackjackgame = {
 
   cards: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
 
-  cardsMap: { "A": [1, 11], "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 10, "Q": 10, "K": 10 },
+  cardsMap: { "A": [1, 11], "2": [2], "3": [3], "4": [4], "5": [5], "6": [6], "7": [7], "8": [8], "9": [9], "10": [10], "J": [10], "Q": [10], "K": [10] },
 
   isStand: false,
   isTurnsOver: false,
@@ -55,7 +56,7 @@ hitbutton.addEventListener("click", blackjackHit);
 //document.querySelector("#HitButton")?.addEventListener("click", blackjackHit);
 
 function blackjackHit() {
-  console.log("Hallo")
+
   if (blackjackgame["isStand"] === false) {
     let card: string = randomcard();
     //showCard(card, PLAYER);
@@ -115,17 +116,18 @@ function updateWert(card: string, activePlayer: IPlayer) {
     }
   }
   else {
-    console.log(blackjackgame["cardsMap"])
-    
-    activePlayer["score"] += blackjackgame["cardsMap"][card];
+    //console.log(blackjackgame["cardsMap"]);
+   // console.log(blackjackgame.cardsMap["A"]);
+    activePlayer["score"] += blackjackgame["cardsMap"][card][0];
+    activePlayer["score"] += blackjackgame["cardsMap"][card][0];
   }
 }
 
 function showScore(activePlayer: IPlayer) {
-  console.log(activePlayer["Wertdiv"]);
+  
   const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
   const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
-  console.log(testquer);
+  
   if (activePlayer["score"] > 21) {
    // document.querySelector("Wertdiv").innerHTML = "BUST!";
     
@@ -138,7 +140,7 @@ function showScore(activePlayer: IPlayer) {
   else {
     //const test2 = document.getElementById(activePlayer["Wertdiv"]) as HTMLDivElement;
     testquer.innerHTML = activePlayer["score"].toString();
-    console.log(activePlayer["score"]);
+    
     
    // document.querySelector(activePlayer["Wertdiv"]).textContent = activePlayer["score"]
   }
