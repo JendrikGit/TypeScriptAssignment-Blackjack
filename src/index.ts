@@ -41,7 +41,7 @@ let cardsMap: {[key:string]:number[]} = { "A": [1, 11], "2": [2], "3": [3], "4":
 interface IPlayer { Wertdiv: string, div: string, boxSize: string, score: number };
 interface IDealer { Wertdiv: string, div: string, boxSize: string, score: number };
 const PLAYER: IPlayer = blackjackgame["player"];
-const DEALER: object = blackjackgame["dealer"];
+const DEALER: IDealer = blackjackgame["dealer"];
 
 //const hitSound = new Audio(".../...");
 //const winSound = new Audio(".../...");
@@ -54,6 +54,8 @@ let winner: string;
 const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
 hitbutton.addEventListener("click", blackjackHit);
 //document.querySelector("#HitButton")?.addEventListener("click", blackjackHit);
+const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
+standbutton.addEventListener("click",blackjackStand)
 
 function blackjackHit() {
 
@@ -61,10 +63,36 @@ function blackjackHit() {
     let card: string = randomcard();
     //showCard(card, PLAYER);
     console.log(card)
-    updateWert(card, PLAYER)
+    updateWertPlayer(card, PLAYER)
     showScore(PLAYER)
   }
 }
+
+function blackjackStand(){
+  console.log("Standausge")
+  if(blackjackgame.pressOnce === false){
+  blackjackgame["isStand"] = true;
+  let yourImage = document.querySelector("#PlayerSide")?.querySelectorAll("img");
+  
+  
+  }
+  
+  /*for(let i = 0; i < yourImages.length; i++){
+    let card: string = randomcard();
+  //  showCard(card, Dealer);
+    updateWertDealer(card, DEALER);
+    showScore(DEALER);
+
+
+
+blackjackgame["isTurnsOver"] = true;}*/
+
+  
+  blackjackgame.pressOnce = true;
+  
+  }
+  
+
 
 function randomcard() {
   let randomIndex: number = Math.floor(Math.random() * 13);
@@ -106,7 +134,28 @@ document.getElementsByClassName("PlayerWertBJ")
 
 }*/
 
-function updateWert(card: string, activePlayer: IPlayer) {
+function updateWertPlayer(card: string, activePlayer: IPlayer) {
+  if (card === "A") {
+    if (activePlayer["score"] + cardsMap[card][1] <= 21) {
+      activePlayer["score"] += cardsMap[card][1];
+    } else {
+      activePlayer["score"] += cardsMap[card][0];
+
+    }
+  }
+
+  else {
+  // let currentcard = card.toString();
+   // console.log(blackjackgame["cardsMap"]);
+    
+   // console.log(blackjackgame.cardsMap["card"]);
+    console.log(typeof(card));
+    //console.log(typeof(blackjackgame.cardsMap));
+   activePlayer["score"] += cardsMap[card][0];
+   // activePlayer["score"] += blackjackgame["cardsMap"][card];
+  }
+}
+function updateWertDealer(card: string, activePlayer: IDealer) {
   if (card === "A") {
     if (activePlayer["score"] + cardsMap[card][1] <= 21) {
       activePlayer["score"] += cardsMap[card][1];
@@ -157,5 +206,4 @@ let Hit = function () {
 
 }
 */
-
 
