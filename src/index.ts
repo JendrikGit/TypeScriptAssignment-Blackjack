@@ -49,68 +49,10 @@ const DEALER: IDealer = blackjackgame["dealer"];
 
 let WindowsWidth: number = window.screen.width;
 let windowHeight: number = window.screen.height;
-let winner: string;
+let winner: object;
 
-const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
-hitbutton.addEventListener("click", blackjackHit);
-//document.querySelector("#HitButton")?.addEventListener("click", blackjackHit);
-const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
-standbutton.addEventListener("click",blackjackStand)
-
-function blackjackHit() {
-
-  if (blackjackgame["isStand"] === false) {
-    let card: string = randomcard();
-    //showCard(card, PLAYER);
-    console.log(card)
-    updateWertPlayer(card, PLAYER)
-    showScore(PLAYER)
-  }
-}
-
-function blackjackStand(){
-  console.log("Standausge")
-  if(blackjackgame.pressOnce === false){
-  blackjackgame["isStand"] = true;
-  let yourImage = document.querySelector("#PlayerSide")?.querySelectorAll("img");
-  
-  
-  }
-  
-  /*for(let i = 0; i < yourImages.length; i++){
-    let card: string = randomcard();
-  //  showCard(card, Dealer);
-    updateWertDealer(card, DEALER);
-    showScore(DEALER);
-
-
-
-blackjackgame["isTurnsOver"] = true;}*/
-
-  
-  blackjackgame.pressOnce = true;
-  
-  }
-  
-
-
-function randomcard() {
-  let randomIndex: number = Math.floor(Math.random() * 13);
-  return blackjackgame["cards"][randomIndex];
-
-
-}
-
-/*function showCard(card, activePlayer){
-  if(activePlayer["score"] <= 21){
-    let cardImage = document.createElement("img");
-    cardImage.src = 'images/${card}.png';
-    cardImage.style = 'width:' ${widthSize()}; 'height:'${heightSize()};
-    document.querySelector(activePlayer["div"]).appendChild(cardImage);
-
-  }
-}
-*/
+//Funktionen für die Skalierung des Bildschirmes
+/*
 function widthSize() {
   if (WindowsWidth > 1000) {
     let newWidthSize: number = window.screen.width * 0.1;
@@ -128,6 +70,97 @@ function heightSize() {
   else
     return window.screen.height * 0.15;
 }
+
+*/
+
+//Aufrufe der Buttons
+const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
+hitbutton.addEventListener("click", blackjackHit);
+
+const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
+standbutton.addEventListener("click",blackjackStand);
+
+const doubledownbutton = document.getElementById("DoubleDownButton")as HTMLButtonElement;
+//doubledownbutton.addEventListener("click", blackjackHit);
+
+const splitbutton = document.getElementById("SplitButton")as HTMLButtonElement;
+//splitbutton.addEventListener("click", blackjackHit);
+
+const surrendertbutton = document.getElementById("SurrenderButton")as HTMLButtonElement;
+//surrendertbutton.addEventListener("click", blackjackHit);
+
+//Anfang der Funktionen
+function blackjackHit() {
+
+  if (blackjackgame["isStand"] === false) {
+    let card: string = randomcard();
+    //showCard(card, PLAYER);
+    console.log(card)
+    updateWertPlayer(card, PLAYER)
+    showScore(PLAYER)
+  }
+}
+
+function blackjackStand(){
+  console.log("Standausge")
+  if(blackjackgame.pressOnce === false){
+    console.log("Standausge2")
+  blackjackgame["isStand"] = true;
+  console.log(blackjackgame["isStand"] = true);
+  
+
+  //let yourImages = document.getElementById("#PlayerSide").querySelectorAll("img");
+  
+  }
+  
+  //for(let i: number = 0; i < yourImages.length; i++){
+
+    let card: string = randomcard();
+  //  showCard(card, Dealer);
+    updateWertDealer(card, DEALER);
+    showScore(DEALER);
+blackjackgame["isTurnsOver"] = true;
+  blackjackgame.pressOnce = true;
+  
+  }
+
+  //Dealer handelt als letztes. Hat am Anfang zwei Karten, wenn diese weniger als 16 Wert sind, dann zieht er weitere.
+  //
+  function DealerLogic(activePlayer:IDealer){
+    let card: string = randomcard();
+    updateWertDealer(card, DEALER);
+
+
+
+do {updateWertDealer(card, DEALER);
+}
+while(activePlayer["score"] < 16)
+
+
+
+
+
+
+
+
+  }
+
+// Funktion für eine Zufällige Karte
+function randomcard() {
+  let randomIndex: number = Math.floor(Math.random() * 13);
+  return blackjackgame["cards"][randomIndex];
+}
+
+function showCard(card, activePlayer){
+  if(activePlayer["score"] <= 21){
+    let cardImage = document.createElement("img");
+    cardImage.src = `images/${card}.png`;
+    cardImage.style = 'width:' ${widthSize()}; 'height:'${heightSize()};
+    document.querySelector(activePlayer["div"]).appendChild(cardImage);
+
+  }
+}
+
 /*
 function Hit(){
 document.getElementsByClassName("PlayerWertBJ")
@@ -149,7 +182,7 @@ function updateWertPlayer(card: string, activePlayer: IPlayer) {
    // console.log(blackjackgame["cardsMap"]);
     
    // console.log(blackjackgame.cardsMap["card"]);
-    console.log(typeof(card));
+   // console.log(typeof(card));
     //console.log(typeof(blackjackgame.cardsMap));
    activePlayer["score"] += cardsMap[card][0];
    // activePlayer["score"] += blackjackgame["cardsMap"][card];
@@ -187,18 +220,12 @@ function showScore(activePlayer: IPlayer) {
     
    testquer.innerHTML = "BUST!";
    // let text = document.querySelector["Wertdiv"]);
-
-   
-
   }
   else {
     //const test2 = document.getElementById(activePlayer["Wertdiv"]) as HTMLDivElement;
     testquer.innerHTML = activePlayer["score"].toString();
-    
-    
    // document.querySelector(activePlayer["Wertdiv"]).textContent = activePlayer["score"]
   }
-
 }
 /*
 let Hit = function () {
@@ -207,3 +234,73 @@ let Hit = function () {
 }
 */
 
+function CalculateWinner(){
+if (PLAYER["score"] <= 21){
+if(PLAYER["score"] > DEALER["score"] || DEALER["score"] > 21){
+  winner = PLAYER;
+  console.log("Spieler hat gewonnen")
+}
+
+
+else if(PLAYER["score"] < DEALER["score"]){
+  winner = DEALER;
+  console.log("Dealer hat gewonnen");
+}
+else if(PLAYER["score"] === DEALER["score"]){
+  //Platzhalter eigentlich unentschieden
+  winner = DEALER;
+  console.log("Unentschieden");
+}
+}
+
+else if(PLAYER["score"] > 21 && DEALER["score"] <= 21){
+winner = DEALER;
+console.log("None");
+
+}
+else if(PLAYER["score"] > 21 && DEALER["score"] > 21){
+  // Eigentlich none (gibt es nicht, weil Player zuerst zieht.)
+  winner = DEALER;
+  console.log("Spieler hat gewonnen");
+}
+return winner;
+}
+
+function showWinner(){
+let message!: string
+
+if(winner === PLAYER){
+message = "PLAYER WONS!";
+//document.querySelector("#losses")?.innerHTML
+
+}
+if(winner === DEALER){
+message = "DEALER WONS"
+
+}
+
+//if(winner === draw){}
+
+//if(winner === NONE){}
+
+let winmessage = document.getElementById("#PlayerTitel")as HTMLDivElement;
+winmessage.innerHTML = message;
+}
+
+/*function renderCard(card: string, activePlayer: object){
+
+
+}*/
+
+
+
+
+
+
+function DealerLogicf(){
+
+do{ /*neue Karte */}
+
+while(/* Kartenwert des Spielers*/ > /*Kartenwert des Dealers */)
+
+}
