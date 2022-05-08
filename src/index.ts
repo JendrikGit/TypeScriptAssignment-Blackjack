@@ -19,7 +19,7 @@ let blackjackgame = {
   },
 
   dealer: /*{Wertdiv: string; div:string; boxSize:string; score: number }: */{
-    Wertdiv: "CroupierWertBJ",
+    Wertdiv: "#CroupierWertBJ",
     div: "#Croupiercardsurface",
     boxSize: "Sides div",
     score: 0,
@@ -78,7 +78,7 @@ const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
 hitbutton.addEventListener("click", blackjackHit);
 
 const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
-//standbutton.addEventListener("click",blackjackStand);
+standbutton.addEventListener("click",blackjackStand);
 
 const doubledownbutton = document.getElementById("DoubleDownButton")as HTMLButtonElement;
 //doubledownbutton.addEventListener("click", blackjackHit);
@@ -95,22 +95,23 @@ function blackjackHit() {
   if (blackjackgame["isStand"] === false) {
     let card: string = randomcard();
     //showCard(card, PLAYER);
-    console.log(card)
-    showCardPlayer(card, PLAYER)
-    updateWertPlayer(card, PLAYER)
-    showScore(PLAYER)
+    //console.log(card);
+    showCardPlayer(card, PLAYER);
+    updateWertPlayer(card, PLAYER);
+    showScore(PLAYER);
   }
 }
 
 
 
-/*
+
 function blackjackStand(){
-  console.log("Standausge")
+  let card: string = randomcard();
+  //console.log("Standausge")
   if(blackjackgame.pressOnce === false){
-    console.log("Standausge2")
   blackjackgame["isStand"] = true;
-  console.log(blackjackgame["isStand"] = true);
+  DealerLogic(DEALER);
+  //console.log(blackjackgame["isStand"] = true);
   
 
   //let yourImages = document.getElementById("#PlayerSide").querySelectorAll("img");
@@ -119,36 +120,30 @@ function blackjackStand(){
   
   //for(let i: number = 0; i < yourImages.length; i++){
 
-    let card: string = randomcard();
-  //  showCard(card, Dealer);
-    updateWertDealer(card, DEALER);
-    showScore(DEALER);
 blackjackgame["isTurnsOver"] = true;
   blackjackgame.pressOnce = true;
   
   }
-*/
 
 
-
-
-/*
   //Dealer handelt als letztes. Hat am Anfang zwei Karten, wenn diese weniger als 16 Wert sind, dann zieht er weitere.
   //
-  function DealerLogic(activePlayer:IDealer){
-    let card: string = randomcard();
-    updateWertDealer(card, DEALER);
-
-
-
-do {updateWertDealer(card, DEALER);
+  function DealerLogic(activePlayer: IDealer){
+console.log("DealerLogic wird ausgeführt")
+do {
+  console.log("start der Schleife");
+  let card: string = randomcard();
+  updateWertDealer(card, DEALER);
+  showDealerScore(DEALER);
+  showCardDealer(card, DEALER);
+  
 }
-while(activePlayer["score"] < 16)
+while(activePlayer["score"] < 17)
 
 
 
   }
-*/
+
 
 
 
@@ -165,7 +160,18 @@ function randomcard() {
 function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
     let cardImage = document.createElement("img");
-    console.log(cardImage)
+   // console.log(cardImage)
+    cardImage.src = `TestCards/${card}.png`;
+   // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
+    const Picsurface = document.querySelector(activePlayer["div"])as HTMLDivElement;
+    Picsurface.appendChild(cardImage);
+
+  }
+}
+function showCardDealer(card: string, activePlayer: IDealer){
+  if(activePlayer["score"] <= 21){
+    let cardImage = document.createElement("img");
+   // console.log(cardImage)
     cardImage.src = `TestCards/${card}.png`;
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
     const Picsurface = document.querySelector(activePlayer["div"])as HTMLDivElement;
@@ -174,19 +180,6 @@ function showCardPlayer(card: string, activePlayer: IPlayer){
   }
 }
 
-
-  function showCardDealer(card: string, activePlayer: IDealer){
-    if(activePlayer["score"] <= 21){
-      let cardImage = document.createElement("img")as HTMLImageElement;
-      //console.log(cardImage)
-      cardImage.src = `TestCards/${card}.png`;
-     // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
-      const Picsurface = document.getElementById(activePlayer["div"])as HTMLDivElement;
-      console.log(Picsurface)
-      Picsurface.appendChild(cardImage);
-  
-    }
-}
 
 
 /*
@@ -258,6 +251,40 @@ function showScore(activePlayer: IPlayer) {
    // document.querySelector(activePlayer["Wertdiv"]).textContent = activePlayer["score"]
   }
 }
+
+function showDealerScore(activePlayer: IDealer) {
+  
+  const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
+  const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
+  
+  if (activePlayer["score"] > 21) {
+   // document.querySelector("Wertdiv").innerHTML = "BUST!";
+    
+   testquer.innerHTML = "BUST!";
+   // let text = document.querySelector["Wertdiv"]);
+  }
+  else {
+    //const test2 = document.getElementById(activePlayer["Wertdiv"]) as HTMLDivElement;
+    testquer.innerHTML = activePlayer["score"].toString();
+   // document.querySelector(activePlayer["Wertdiv"]).textContent = activePlayer["score"]
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 let Hit = function () {
   console.log("Hello World");
