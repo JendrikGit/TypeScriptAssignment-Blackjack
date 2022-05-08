@@ -77,13 +77,13 @@ object-fit: contain;
 }
 
 
-.Playercardsurface {
+#Playercardsurface {
     margin-top: 300px;
     margin-left: 400px;
   
 }
 
-.Croupiercardsurface{
+#Croupiercardsurface{
     margin-top: 300px;
     margin-left: 400px;
     

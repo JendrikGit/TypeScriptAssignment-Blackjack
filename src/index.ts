@@ -13,14 +13,14 @@ export class Beispiel extends HTMLElement {
 let blackjackgame = {
   player: {
     Wertdiv: "#PlayerWertBJ",
-    div: "PlayerSide",
+    div: "#Playercardsurface",
     boxSize: "Sides div",
     score: 0,
   },
 
   dealer: /*{Wertdiv: string; div:string; boxSize:string; score: number }: */{
     Wertdiv: "CroupierWertBJ",
-    div: "CroupierSide",
+    div: "#Croupiercardsurface",
     boxSize: "Sides div",
     score: 0,
   },
@@ -70,15 +70,15 @@ function heightSize() {
   else
     return window.screen.height * 0.15;
 }
-
 */
+
 
 //Aufrufe der Buttons
 const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
 hitbutton.addEventListener("click", blackjackHit);
 
 const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
-standbutton.addEventListener("click",blackjackStand);
+//standbutton.addEventListener("click",blackjackStand);
 
 const doubledownbutton = document.getElementById("DoubleDownButton")as HTMLButtonElement;
 //doubledownbutton.addEventListener("click", blackjackHit);
@@ -96,11 +96,15 @@ function blackjackHit() {
     let card: string = randomcard();
     //showCard(card, PLAYER);
     console.log(card)
+    showCardPlayer(card, PLAYER)
     updateWertPlayer(card, PLAYER)
     showScore(PLAYER)
   }
 }
 
+
+
+/*
 function blackjackStand(){
   console.log("Standausge")
   if(blackjackgame.pressOnce === false){
@@ -123,7 +127,12 @@ blackjackgame["isTurnsOver"] = true;
   blackjackgame.pressOnce = true;
   
   }
+*/
 
+
+
+
+/*
   //Dealer handelt als letztes. Hat am Anfang zwei Karten, wenn diese weniger als 16 Wert sind, dann zieht er weitere.
   //
   function DealerLogic(activePlayer:IDealer){
@@ -138,12 +147,14 @@ while(activePlayer["score"] < 16)
 
 
 
-
-
-
-
-
   }
+*/
+
+
+
+
+
+
 
 // Funktion für eine Zufällige Karte
 function randomcard() {
@@ -151,15 +162,29 @@ function randomcard() {
   return blackjackgame["cards"][randomIndex];
 }
 
-function showCard(card, activePlayer){
+function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
     let cardImage = document.createElement("img");
-    cardImage.src = `images/${card}.png`;
-    cardImage.style = 'width:' ${widthSize()}; 'height:'${heightSize()};
-    document.querySelector(activePlayer["div"]).appendChild(cardImage);
+    cardImage.src = `Playingcards/${card}.png`;
+   // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
+    const Picsurface = document.getElementById(activePlayer["div"])as HTMLDivElement;
+    Picsurface.appendChild(cardImage);
 
   }
 }
+
+
+  function showCardDealer(card: string, activePlayer: IDealer){
+    if(activePlayer["score"] <= 21){
+      let cardImage = document.createElement("img")as HTMLImageElement;
+      cardImage.src = `TestCards/${card}.png`;
+     // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
+      const Picsurface = document.getElementById(activePlayer["div"])as HTMLDivElement;
+      Picsurface.appendChild(cardImage);
+  
+    }
+}
+
 
 /*
 function Hit(){
@@ -188,6 +213,9 @@ function updateWertPlayer(card: string, activePlayer: IPlayer) {
    // activePlayer["score"] += blackjackgame["cardsMap"][card];
   }
 }
+
+
+
 function updateWertDealer(card: string, activePlayer: IDealer) {
   if (card === "A") {
     if (activePlayer["score"] + cardsMap[card][1] <= 21) {
@@ -234,6 +262,8 @@ let Hit = function () {
 }
 */
 
+
+/*
 function CalculateWinner(){
 if (PLAYER["score"] <= 21){
 if(PLAYER["score"] > DEALER["score"] || DEALER["score"] > 21){
@@ -266,6 +296,8 @@ else if(PLAYER["score"] > 21 && DEALER["score"] > 21){
 return winner;
 }
 
+
+
 function showWinner(){
 let message!: string
 
@@ -290,7 +322,7 @@ winmessage.innerHTML = message;
 /*function renderCard(card: string, activePlayer: object){
 
 
-}*/
+}
 
 
 
@@ -299,8 +331,9 @@ winmessage.innerHTML = message;
 
 function DealerLogicf(){
 
-do{ /*neue Karte */}
+do{ neue Karte }
 
-while(/* Kartenwert des Spielers*/ > /*Kartenwert des Dealers */)
+while( Kartenwert des Spielers > Kartenwert des Dealers )
 
 }
+*/
