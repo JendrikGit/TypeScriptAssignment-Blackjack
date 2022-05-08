@@ -41,11 +41,23 @@ body {
     
     
 }
+#Playercardsurface {
+    margin-top: 200px;
+  margin-right: 100px;
+  
+}
 
-
-#PlayerSide div img{
+#Playercardsurface img{
 padding: 10px;
 object-fit: contain;
+height: 250px;
+
+}
+
+#Croupiercardsurface{
+    margin-top: 300px;
+    margin-left: 400px;
+    
 
 }
 
@@ -76,12 +88,6 @@ object-fit: contain;
 
 }
 
-
-#Playercardsurface {
-    margin-top: 300px;
-    margin-left: 400px;
-  
-}
 
 #Croupiercardsurface{
     margin-top: 300px;

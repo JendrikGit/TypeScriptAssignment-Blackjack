@@ -165,9 +165,10 @@ function randomcard() {
 function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
     let cardImage = document.createElement("img");
-    cardImage.src = `Playingcards/${card}.png`;
+    console.log(cardImage)
+    cardImage.src = `TestCards/${card}.png`;
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
-    const Picsurface = document.getElementById(activePlayer["div"])as HTMLDivElement;
+    const Picsurface = document.querySelector(activePlayer["div"])as HTMLDivElement;
     Picsurface.appendChild(cardImage);
 
   }
@@ -177,9 +178,11 @@ function showCardPlayer(card: string, activePlayer: IPlayer){
   function showCardDealer(card: string, activePlayer: IDealer){
     if(activePlayer["score"] <= 21){
       let cardImage = document.createElement("img")as HTMLImageElement;
+      //console.log(cardImage)
       cardImage.src = `TestCards/${card}.png`;
      // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
       const Picsurface = document.getElementById(activePlayer["div"])as HTMLDivElement;
+      console.log(Picsurface)
       Picsurface.appendChild(cardImage);
   
     }
