@@ -106,8 +106,8 @@ function blackjackHit() {
 
 
 function blackjackStand(){
-  let card: string = randomcard();
-  //console.log("Standausge")
+  //let card: string = randomcard();
+ // console.log()
   if(blackjackgame.pressOnce === false){
   blackjackgame["isStand"] = true;
   DealerLogic(DEALER);
@@ -129,19 +129,23 @@ blackjackgame["isTurnsOver"] = true;
   //Dealer handelt als letztes. Hat am Anfang zwei Karten, wenn diese weniger als 16 Wert sind, dann zieht er weitere.
   //
   function DealerLogic(activePlayer: IDealer){
-console.log("DealerLogic wird ausgeführt")
+  
+//console.log("DealerLogic wird ausgeführt")
+
 do {
-  console.log("start der Schleife");
+  
+  //console.log("start der Schleife");
   let card: string = randomcard();
+  console.log("card2" + card)
+  //setTimeout(function(){
+  showCardDealer(card, DEALER);
   updateWertDealer(card, DEALER);
   showDealerScore(DEALER);
-  showCardDealer(card, DEALER);
-  
+ //}, 2000);
 }
 while(activePlayer["score"] < 17)
 
-
-
+CalculateWinner();
   }
 
 
@@ -236,13 +240,15 @@ function updateWertDealer(card: string, activePlayer: IDealer) {
 
 function showScore(activePlayer: IPlayer) {
   
-  const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
+ // const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
   const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
   
   if (activePlayer["score"] > 21) {
    // document.querySelector("Wertdiv").innerHTML = "BUST!";
     
-   testquer.innerHTML = "BUST!";
+   testquer.innerHTML = "x";
+   //testquer.style.fontSize = "35px";
+   testquer.style.backgroundColor= "#f70000";
    // let text = document.querySelector["Wertdiv"]);
   }
   else {
@@ -254,7 +260,7 @@ function showScore(activePlayer: IPlayer) {
 
 function showDealerScore(activePlayer: IDealer) {
   
-  const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
+  //const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
   const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
   
   if (activePlayer["score"] > 21) {
@@ -293,7 +299,7 @@ let Hit = function () {
 */
 
 
-/*
+
 function CalculateWinner(){
 if (PLAYER["score"] <= 21){
 if(PLAYER["score"] > DEALER["score"] || DEALER["score"] > 21){
@@ -327,7 +333,7 @@ return winner;
 }
 
 
-
+/*
 function showWinner(){
 let message!: string
 
@@ -347,23 +353,4 @@ message = "DEALER WONS"
 
 let winmessage = document.getElementById("#PlayerTitel")as HTMLDivElement;
 winmessage.innerHTML = message;
-}
-
-/*function renderCard(card: string, activePlayer: object){
-
-
-}
-
-
-
-
-
-
-function DealerLogicf(){
-
-do{ neue Karte }
-
-while( Kartenwert des Spielers > Kartenwert des Dealers )
-
-}
-*/
+}*/
