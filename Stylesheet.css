@@ -64,7 +64,7 @@ height: 250px;
 }
 
 #Croupiercardsurface{
-    margin-top: 200px;
+    margin-top: 50px;
     margin-left: 100px;
 
 }
@@ -153,6 +153,19 @@ height: 250px;
     box-shadow: 0 0 1px black;
     font-size: 50px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+    margin-left: 200px;   
     
-    
+}
+
+#PlayerTitel {
+    margin-top: 10px;
+    color: white;
+    font-size:20px;
+}
+
+#CroupierTitel{
+    margin-top: 10px;
+    color: white;
+    font-size:20px;
 }

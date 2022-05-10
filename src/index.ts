@@ -266,7 +266,9 @@ function showDealerScore(activePlayer: IDealer) {
   if (activePlayer["score"] > 21) {
    // document.querySelector("Wertdiv").innerHTML = "BUST!";
     
-   testquer.innerHTML = "BUST!";
+  // testquer.innerHTML = "BUST!";
+   testquer.innerHTML = "x";
+   testquer.style.backgroundColor= "#f70000";
    // let text = document.querySelector["Wertdiv"]);
   }
   else {
