@@ -118,10 +118,6 @@ function blackjackHit() {
   }
 }
 
-
-
-
-
 function blackjackStand(){
   //let card: string = randomcard();
  // console.log()
@@ -295,27 +291,6 @@ function showDealerScore(activePlayer: IDealer) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-let Hit = function () {
-  console.log("Hello World");
-
-}
-*/
-
-
-
 function CalculateWinner(){
 if (PLAYER["score"] <= 21){
 if(PLAYER["score"] > DEALER["score"] || DEALER["score"] > 21){
@@ -380,6 +355,7 @@ function nextRound(){
   blackjackgame["PlayerHit"] = false;
   blackjackgame["isTurnsOver"] = false;
   blackjackgame["isStand"] = false;
+  blackjackgame["pressOnce"] = false;
   }
   }
   function resetPlayer(activePlayer: IPlayer){
