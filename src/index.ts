@@ -33,6 +33,7 @@ let blackjackgame = {
   isStand: false,
   isTurnsOver: false,
   pressOnce: false,
+  PlayerHit: false,
 
 };
 let cardsMap: {[key:string]:number[]} = { "A": [1, 11], "2": [2], "3": [3], "4": [4], "5": [5], "6": [6], "7": [7], "8": [8], "9": [9], "10": [10], "J": [10], "Q": [10], "K": [10]};
@@ -87,20 +88,36 @@ const splitbutton = document.getElementById("SplitButton")as HTMLButtonElement;
 //splitbutton.addEventListener("click", blackjackHit);
 
 const surrendertbutton = document.getElementById("SurrenderButton")as HTMLButtonElement;
-//surrendertbutton.addEventListener("click", blackjackHit);
+surrendertbutton.addEventListener("click", nextRound);
 
 //Anfang der Funktionen
+
+function restartgame(){
+  if(blackjackgame.pressOnce === false){
+ //Spieler wählt einsatz
+
+  //Spieler bekommt zwei Karten und der Dealer bekommt eine Karte
+
+  // Spiel beginnt dann
+
+  }
+}
+
+
 function blackjackHit() {
 
   if (blackjackgame["isStand"] === false) {
     let card: string = randomcard();
     //showCard(card, PLAYER);
     //console.log(card);
+    blackjackgame["PlayerHit"] = true;
     showCardPlayer(card, PLAYER);
     updateWertPlayer(card, PLAYER);
-    showScore(PLAYER);
+    showPlayerScore(PLAYER);
+    //blackjackgame["PlayerHit"] = true;
   }
 }
+
 
 
 
@@ -108,20 +125,21 @@ function blackjackHit() {
 function blackjackStand(){
   //let card: string = randomcard();
  // console.log()
-  if(blackjackgame.pressOnce === false){
+  if(blackjackgame.pressOnce === false && blackjackgame["PlayerHit"] === true){
   blackjackgame["isStand"] = true;
   DealerLogic(DEALER);
   //console.log(blackjackgame["isStand"] = true);
   
 
   //let yourImages = document.getElementById("#PlayerSide").querySelectorAll("img");
-  
+  blackjackgame.pressOnce = true;
+  blackjackgame["isTurnsOver"] = true
   }
   
   //for(let i: number = 0; i < yourImages.length; i++){
 
-blackjackgame["isTurnsOver"] = true;
-  blackjackgame.pressOnce = true;
+/*blackjackgame["isTurnsOver"] = true;
+  blackjackgame.pressOnce = true;*/
   
   }
 
@@ -144,11 +162,7 @@ do {
  //}, 2000);
 }
 while(activePlayer["score"] < 17)
-
-CalculateWinner();
   }
-
-
 
 
 
@@ -163,23 +177,23 @@ function randomcard() {
 
 function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
-    let cardImage = document.createElement("img");
+    let cardImage = document.createElement("img")as HTMLImageElement;
    // console.log(cardImage)
     cardImage.src = `TestCards/${card}.png`;
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
-    const Picsurface = document.querySelector(activePlayer["div"])as HTMLDivElement;
-    Picsurface.appendChild(cardImage);
+    const Cardplace = document.querySelector(activePlayer["div"])as HTMLDivElement;
+    Cardplace.appendChild(cardImage);
 
   }
 }
 function showCardDealer(card: string, activePlayer: IDealer){
   if(activePlayer["score"] <= 21){
-    let cardImage = document.createElement("img");
+    let cardImage = document.createElement("img")as HTMLImageElement;
    // console.log(cardImage)
     cardImage.src = `TestCards/${card}.png`;
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
-    const Picsurface = document.querySelector(activePlayer["div"])as HTMLDivElement;
-    Picsurface.appendChild(cardImage);
+    const Cardplace = document.querySelector(activePlayer["div"])as HTMLDivElement;
+    Cardplace.appendChild(cardImage);
 
   }
 }
@@ -238,7 +252,7 @@ function updateWertDealer(card: string, activePlayer: IDealer) {
   }
 }
 
-function showScore(activePlayer: IPlayer) {
+function showPlayerScore(activePlayer: IPlayer) {
   
  // const test1 = document.getElementById(activePlayer["Wertdiv"])as HTMLDivElement;
   const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
@@ -356,3 +370,42 @@ message = "DEALER WONS"
 let winmessage = document.getElementById("#PlayerTitel")as HTMLDivElement;
 winmessage.innerHTML = message;
 }*/
+
+//Next Round ->
+function nextRound(){
+  if(blackjackgame["isTurnsOver"] === true){
+    console.log("nextRound()")
+  resetDealer(DEALER);
+  resetPlayer(PLAYER);
+  blackjackgame["PlayerHit"] = false;
+  blackjackgame["isTurnsOver"] = false;
+  blackjackgame["isStand"] = false;
+  }
+  }
+  function resetPlayer(activePlayer: IPlayer){
+    console.log("resetPlayer");
+  activePlayer["score"]= 0;
+  //let cardImage = document.createElement("img");
+  //updateWertPlayer(card, PLAYER);
+      showPlayerScore(PLAYER);
+      const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
+      testquer.style.backgroundColor= "white";
+     // const ImgPlace = document.getElementById(activePlayer["div"]);
+     const ImgDiv = document.querySelector(activePlayer["div"])as HTMLDivElement;
+    while(ImgDiv.firstChild){
+     ImgDiv.removeChild(ImgDiv.firstChild);}
+  }
+  
+  function resetDealer(activePlayer: IDealer){
+    console.log("resetDealer");
+    activePlayer["score"]= 0;
+   // let cardImage = document.createElement("img");
+    //updateWertPlayer(card, PLAYER);
+    showPlayerScore(DEALER);
+    const testquer = document.querySelector(activePlayer["Wertdiv"])as HTMLDivElement;
+    testquer.style.backgroundColor= "white";
+    //const Cardplace = document.querySelectorAll("img");
+    const ImgDiv = document.querySelector(activePlayer["div"])as HTMLDivElement;
+    while(ImgDiv.firstChild){
+     ImgDiv.removeChild(ImgDiv.firstChild);}
+  }
