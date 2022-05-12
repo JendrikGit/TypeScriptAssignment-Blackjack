@@ -54,6 +54,7 @@ body {
 #Playercardsurface {
     margin-top: 50px;
   margin-right: 100px;
+  height: 500px;
   
 }
 
@@ -99,25 +100,17 @@ height: 250px;
     background-color: #2D3047;
     border-radius: 5%;
     color: white;
-    font-size: 0.7cm;
-    margin-top: 0.8cm;
+    font-size: 28px;
+    margin-top: 30px;
     text-shadow: 2px 2px 1.5px black;
     box-shadow: 1px 1px 2px #000;
-    /* display: block;*/
-    /* margin-top: 0.5cm;
-    margin-left: 0.5cm;*/
-    /*  flex-direction: column;
-    align-items: center;
-    position: relative;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;*/
+    
 
 }
 
-/*.ChooseButtons:hover {
+.ChooseButtons:hover {
     cursor: pointer;
-}*/
+}
 
 /*Spielkartengröße (Rückseite)*/
 /*.Card {
@@ -132,8 +125,8 @@ height: 250px;
 
 
 #PlayerWertBJ {
-    width: 60px;
-    height: 60px;
+    width: 62px;
+    height: 62px;
     border-radius: 180%;
     background-color: white;
     font-size: 50px;
@@ -146,8 +139,8 @@ height: 250px;
 }
 
 #CroupierWertBJ{
-    width: 60px;
-    height: 60px;
+    width: 62px;
+    height: 62px;
     border-radius: 180%;
     background-color: white;
     box-shadow: 0 0 1px black;
@@ -168,4 +161,35 @@ height: 250px;
     margin-top: 60px;
     color: white;
     font-size:25px;
+}
+
+.Wagerdiv{
+margin-top:90px;
+font-size: 20px;
+font-family: Arial, Helvetica, sans-serif;
+color: white;
+}
+
+#Wager{
+    font-size: 20px;
+}
+
+.Cashspace{
+background-color: #2D3047;
+height: 55px;
+width: 250px;
+opacity: 0.8;
+border-radius: 2%;
+padding-top: 10px;
+}
+
+#winner{
+   font-weight: 300;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    
+    
+   
 }
