@@ -27,7 +27,11 @@ let blackjackgame = {
   },
 
 
-  cards: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
+  cards: ["HerzA", "Herz2", "Herz3", "Herz4", "Herz5", "Herz6", "Herz7", "Herz8", "Herz9", "Herz10", "HerzJ", "HerzQ", "HerzK", 
+          "KreuzA","Kreuz2","Kreuz3","Kreuz4","Kreuz5","Kreuz6","Kreuz7","Kreuz8","Kreuz9","Kreuz10","KreuzJ","KreuzQ","KreuzK",
+          "PikA","Pik2","Pik3","Pik4","Pik5","Pik6","Pik7","Pik8","Pik9","Pik10","PikJ","PikQ","PikK",
+          "KaroA","Karo2","Karo3","Karo4","Karo5","Karo6","Karo7","Karo8","Karo9","Karo10","KaroJ","KaroQ","KaroK"
+],
 
  // cardsMap: { "A": [1, 11], "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 10, "Q": 10, "K": 10},
 
@@ -37,8 +41,10 @@ let blackjackgame = {
   PlayerHit: false,
 
 };
-let cardsMap: {[key:string]:number[]} = { "A": [1, 11], "2": [2], "3": [3], "4": [4], "5": [5], "6": [6], "7": [7], "8": [8], "9": [9], "10": [10], "J": [10], "Q": [10], "K": [10]};
-
+let cardsMap: {[key:string]:number[]} = { "HerzA": [1, 11], "Herz2": [2], "Herz3": [3], "Herz4": [4], "Herz5": [5], "Herz6": [6], "Herz7": [7], "Herz8": [8], "Herz9": [9], "Herz10": [10], "HerzJ": [10], "HerzQ": [10], "HerzK": [10],
+"KaroA": [1, 11], "Karo2": [2], "Karo3": [3], "Karo4": [4], "Karo5": [5], "Karo6": [6], "Karo7": [7], "Karo8": [8], "Karo9": [9], "Karo10": [10], "KaroJ": [10], "KaroQ": [10], "KaroK": [10],
+"PikA": [1, 11], "Pik2": [2], "Pik3": [3], "Pik4": [4], "Pik5": [5], "Pik6": [6], "Pik7": [7], "Pik8": [8], "Pik9": [9], "Pik10": [10], "PikJ": [10], "PikQ": [10], "PikK": [10],
+"KreuzA": [1, 11], "Kreuz2": [2], "Kreuz3": [3], "Kreuz4": [4], "Kreuz5": [5], "Kreuz6": [6], "Kreuz7": [7], "Kreuz8": [8], "Kreuz9": [9], "Kreuz10": [10], "KreuzJ": [10], "KreuzQ": [10], "KreuzK": [10] };
 
 interface IPlayer { Wertdiv: string, div: string, boxSize: string, score: number };
 interface IDealer { Wertdiv: string, div: string, boxSize: string, score: number };
@@ -94,6 +100,9 @@ surrendertbutton.addEventListener("click", nextRound);
 const wager = document.getElementById("Wager")as HTMLInputElement
 //Anfang der Funktionen
 wager.addEventListener("change",choosewager)
+
+
+
 function restartgame(){
   if(blackjackgame.pressOnce === false){
  //Spieler wählt einsatz
@@ -132,14 +141,16 @@ function blackjackStand(){
   //let yourImages = document.getElementById("#PlayerSide").querySelectorAll("img");
   blackjackgame.pressOnce = true;
   blackjackgame["isTurnsOver"] = true
+
+  CalculateWinner();
+  showWinner();
   }
   
   //for(let i: number = 0; i < yourImages.length; i++){
 
 /*blackjackgame["isTurnsOver"] = true;
   blackjackgame.pressOnce = true;*/
-  CalculateWinner();
-  showWinner();
+
   }
 
 
@@ -192,7 +203,7 @@ function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
     let cardImage = document.createElement("img")as HTMLImageElement;
    // console.log(cardImage)
-    cardImage.src = `TestCards/${card}.png`;
+    cardImage.src = `Playingcards/${card}.png`;
     let filtercards = blackjackgame.cards.filter((item)=>{return item !== card});
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
     const Cardplace = document.querySelector(activePlayer["div"])as HTMLDivElement;
@@ -205,7 +216,7 @@ function showCardDealer(card: string, activePlayer: IDealer){
   if(activePlayer["score"] <= 21){
     let cardImage = document.createElement("img")as HTMLImageElement;
    // console.log(cardImage)
-    cardImage.src = `TestCards/${card}.png`;
+    cardImage.src = `Playingcards/${card}.png`;
     let filtercards = blackjackgame.cards.filter((item)=>{return item !== card});
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
     const Cardplace = document.querySelector(activePlayer["div"])as HTMLDivElement;
@@ -223,7 +234,9 @@ document.getElementsByClassName("PlayerWertBJ")
 }*/
 
 function updateWertPlayer(card: string, activePlayer: IPlayer) {
-  if (card === "A") {
+
+  // als schleife Solange unter 21
+  if (card === "HerzA" || card === "KaroA"  || card === "PikA" || card === "KreuzA" ) {
     if (activePlayer["score"] + cardsMap[card][1] <= 21) {
       activePlayer["score"] += cardsMap[card][1];
     } else {
@@ -247,7 +260,9 @@ function updateWertPlayer(card: string, activePlayer: IPlayer) {
 
 
 function updateWertDealer(card: string, activePlayer: IDealer) {
-  if (card === "A") {
+  
+  // als schleife Solange unter 21
+  if (card === "HerzA" || card === "KaroA"  || card === "PikA" || card === "KreuzA" ) {
     if (activePlayer["score"] + cardsMap[card][1] <= 21) {
       activePlayer["score"] += cardsMap[card][1];
     } else {
@@ -387,7 +402,10 @@ function nextRound(){
   let winmessage = document.querySelector("#winner")as HTMLSpanElement;
   winmessage.innerHTML = "The Game";
   winmessage.style.color = "white";
-  blackjackgame.cards= ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+  blackjackgame.cards= ["HerzA", "Herz2", "Herz3", "Herz4", "Herz5", "Herz6", "Herz7", "Herz8", "Herz9", "Herz10", "HerzJ", "HerzQ", "HerzK", 
+  "KreuzA","Kreuz2","Kreuz3","Kreuz4","Kreuz5","Kreuz6","Kreuz7","Kreuz8","Kreuz9","Kreuz10","KreuzJ","KreuzQ","KreuzK",
+  "PikA","Pik2","Pik3","Pik4","Pik5","Pik6","Pik7","Pik8","Pik9","Pik10","PikJ","PikQ","PikK",
+  "KaroA","Karo2","Karo3","Karo4","Karo5","Karo6","Karo7","Karo8","Karo9","Karo10","KaroJ","KaroQ","KaroK"];
   blackjackgame["PlayerHit"] = false;
   blackjackgame["isTurnsOver"] = false;
   blackjackgame["isStand"] = false;
