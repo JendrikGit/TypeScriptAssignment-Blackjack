@@ -1,6 +1,7 @@
 // THIS IS A MODULE!
 
 export const helloWorld: string = "Hello world";
+import { createExpressionWithTypeArguments } from "typescript";
 import { alertMe } from "./myOtherModule";
 
 export class Beispiel extends HTMLElement {
@@ -39,6 +40,8 @@ let blackjackgame = {
   isTurnsOver: false,
   pressOnce: false,
   PlayerHit: false,
+  doubledown: false,
+  setwager: false
 
 };
 let cardsMap: {[key:string]:number[]} = { "HerzA": [1, 11], "Herz2": [2], "Herz3": [3], "Herz4": [4], "Herz5": [5], "Herz6": [6], "Herz7": [7], "Herz8": [8], "Herz9": [9], "Herz10": [10], "HerzJ": [10], "HerzQ": [10], "HerzK": [10],
@@ -89,7 +92,7 @@ const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
 standbutton.addEventListener("click",blackjackStand);
 
 const doubledownbutton = document.getElementById("DoubleDownButton")as HTMLButtonElement;
-//doubledownbutton.addEventListener("click", blackjackHit);
+doubledownbutton.addEventListener("click", doubledown);
 
 const splitbutton = document.getElementById("SplitButton")as HTMLButtonElement;
 //splitbutton.addEventListener("click", blackjackHit);
@@ -100,6 +103,7 @@ surrendertbutton.addEventListener("click", nextRound);
 const wager = document.getElementById("Wager")as HTMLInputElement
 //Anfang der Funktionen
 wager.addEventListener("change",choosewager)
+let safewager = wager.value
 
 
 
@@ -113,29 +117,54 @@ function restartgame(){
 
   }
 }
-function choosewager(){}
+function choosewager(){
+let wagerchange = wager.value;
+return wagerchange;
+}
+
 
 function blackjackHit() {
+ 
 
-  if (blackjackgame["isStand"] === false) {
+  if(blackjackgame["isStand"] === false /*&& blackjackgame["setwager"] === false*/){
     let card: string = randomcard();
-    //showCard(card, PLAYER);
-    //console.log(card);
     blackjackgame["PlayerHit"] = true;
+    wager.readOnly = true;
+    
+    blackjackgame["setwager"] = true;
     showCardPlayer(card, PLAYER);
     updateWertPlayer(card, PLAYER);
     showPlayerScore(PLAYER);
-    //blackjackgame["PlayerHit"] = true;
+  }
+/* else if (blackjackgame["isStand"] === false && blackjackgame["setwager"] === true) {
+    showCardPlayer(card, PLAYER);
+    updateWertPlayer(card, PLAYER);
+    showPlayerScore(PLAYER);
+  }*/
+
+
+}
+
+
+function doubledown(){
+  if (blackjackgame["isStand"] === false && blackjackgame["PlayerHit"] === true) {
+    let card: string = randomcard();
+    blackjackgame["doubledown"] = true;
+    wager.value = String(parseInt(wager.value) *2)
+    showCardPlayer(card, PLAYER);
+    updateWertPlayer(card, PLAYER);
+    showPlayerScore(PLAYER);
+    blackjackStand();
   }
 }
 
 function blackjackStand(){
   //let card: string = randomcard();
- // console.log()
+
   if(blackjackgame.pressOnce === false && blackjackgame["PlayerHit"] === true){
   blackjackgame["isStand"] = true;
   DealerLogic(DEALER);
-  //console.log(blackjackgame["isStand"] = true);
+
   
 
   //let yourImages = document.getElementById("#PlayerSide").querySelectorAll("img");
@@ -144,6 +173,7 @@ function blackjackStand(){
 
   CalculateWinner();
   showWinner();
+  CalculateWinnings();
   }
   
   //for(let i: number = 0; i < yourImages.length; i++){
@@ -158,13 +188,13 @@ function blackjackStand(){
   //
   function DealerLogic(activePlayer: IDealer){
   
-//console.log("DealerLogic wird ausgeführt")
+
 
 do {
   
-  //console.log("start der Schleife");
+
  let card: string = randomcard();
-  console.log("card2" + card)
+
   showCardDealer(card, DEALER);
   updateWertDealer(card, DEALER);
   showDealerScore(DEALER);
@@ -174,18 +204,18 @@ while(activePlayer["score"] < 17)
 
 /*
 function Timeout(){
-  console.log("viki")
+
   setTimeout(() => {
-    console.log("viki2")
+
     let card: string = randomcard();
-  console.log("card2" + card)
+
   showCardDealer(card, DEALER);
   updateWertDealer(card, DEALER);
   showDealerScore(DEALER)}
   , 3000);
 
   let card: string = randomcard();
-  console.log("card2" + card)
+
   showCardDealer(card, DEALER);
   updateWertDealer(card, DEALER);
   showDealerScore(DEALER);*/
@@ -201,8 +231,8 @@ function randomcard() {
 
 function showCardPlayer(card: string, activePlayer: IPlayer){
   if(activePlayer["score"] <= 21){
-    let cardImage = document.createElement("img")as HTMLImageElement;
-   // console.log(cardImage)
+    const cardImage = document.createElement("img")as HTMLImageElement;
+ 
     cardImage.src = `Playingcards/${card}.png`;
     let filtercards = blackjackgame.cards.filter((item)=>{return item !== card});
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
@@ -214,8 +244,7 @@ function showCardPlayer(card: string, activePlayer: IPlayer){
 }
 function showCardDealer(card: string, activePlayer: IDealer){
   if(activePlayer["score"] <= 21){
-    let cardImage = document.createElement("img")as HTMLImageElement;
-   // console.log(cardImage)
+    const cardImage = document.createElement("img")as HTMLImageElement;
     cardImage.src = `Playingcards/${card}.png`;
     let filtercards = blackjackgame.cards.filter((item)=>{return item !== card});
    // cardImage.style = `width: ${widthSize()}; height:${heightSize()};`;
@@ -247,11 +276,6 @@ function updateWertPlayer(card: string, activePlayer: IPlayer) {
 
   else {
   // let currentcard = card.toString();
-   // console.log(blackjackgame["cardsMap"]);
-    
-   // console.log(blackjackgame.cardsMap["card"]);
-   // console.log(typeof(card));
-    //console.log(typeof(blackjackgame.cardsMap));
    activePlayer["score"] += cardsMap[card][0];
    // activePlayer["score"] += blackjackgame["cardsMap"][card];
   }
@@ -273,11 +297,11 @@ function updateWertDealer(card: string, activePlayer: IDealer) {
 
   else {
   // let currentcard = card.toString();
-   // console.log(blackjackgame["cardsMap"]);
+
     
-   // console.log(blackjackgame.cardsMap["card"]);
+
     console.log(typeof(card));
-    //console.log(typeof(blackjackgame.cardsMap));
+
    activePlayer["score"] += cardsMap[card][0];
    // activePlayer["score"] += blackjackgame["cardsMap"][card];
   }
@@ -326,24 +350,24 @@ function showDealerScore(activePlayer: IDealer) {
 
 
 
-
+let DRAW: object = {}
 function CalculateWinner(){
-  console.log("Hallo")
+
 if (PLAYER["score"] <= 21){
 if(PLAYER["score"] > DEALER["score"] || DEALER["score"] > 21){
   winner = PLAYER;
-  console.log("Spieler hat gewonnen")
+
 }
 
 
 else if(PLAYER["score"] < DEALER["score"]){
   winner = DEALER;
-  console.log("Dealer hat gewonnen");
+
 }
 else if(PLAYER["score"] === DEALER["score"]){
   //Platzhalter eigentlich unentschieden
-  winner = DEALER;
-  console.log("Unentschieden");
+  winner = DRAW;
+
 }
 }
 
@@ -354,58 +378,119 @@ console.log("None");
 }
 else if(PLAYER["score"] > 21 && DEALER["score"] > 21){
   // Eigentlich none (gibt es nicht, weil Player zuerst zieht.)
-  winner = DEALER;
-  console.log("Spieler hat gewonnen");
+  winner = DRAW;
+
 }
 return winner;
 
 }
 
-/*CalculateMoney(){
+const CashSpan = document.querySelector("#Cash")as HTMLSpanElement;
+// CashSpan.innerHTML = "10000";
+ const Winningsspan = document.querySelector("#Winnings")as HTMLSpanElement;
+
+function CalculateWinnings(){
 
 
+let WagertoInt = parseInt(wager.value);
+let Cash: number = parseInt(CashSpan.innerHTML);
+
+
+if(Cash < 99 ){
+  const winmessage = document.querySelector("#winner")as HTMLSpanElement;
+winmessage.innerHTML = "BROKE"
+}
+  if(winner === PLAYER){
+    let Winnings: number  = WagertoInt;
+  
+    Winningsspan.innerHTML = "+" + String(Winnings);
+    Winningsspan.style.color= "blue";
+  
+    CashSpan.innerHTML = String(Cash + Winnings);
+  
+  
+      }
+      if(winner === DEALER){
+       let Loosings: number =  WagertoInt ;
+        
+       Winningsspan.innerHTML= "-" + Loosings;
+       Winningsspan.style.color= "red";
+  
+       CashSpan.innerHTML = String(Cash - Loosings);
+      }
+      
+  
+  
+  
+      if(winner === DRAW){
+
+    
+    
 
 }
-*/
+
+}
+
 
 function showWinner(){
 let message!: string
 let WinColor!: string
 
 if(winner === PLAYER){
-message = "PLAYER WONS!";
+message = "PLAYER WINS!";
 WinColor = "blue"
 //document.querySelector("#losses")?.innerHTML
 
 }
 if(winner === DEALER){
-message = "DEALER WONS"
+message = "DEALER WINS"
 WinColor= "red"
 
 }
 
-//if(winner === draw){}
+if(winner === DRAW){
+  message = "DRAW"
+
+}
 
 //if(winner === NONE){}
 
-let winmessage = document.querySelector("#winner")as HTMLSpanElement;
+const winmessage = document.querySelector("#winner")as HTMLSpanElement;
 winmessage.innerHTML = message;
 winmessage.style.color= WinColor;
 }
 
-//Next Round ->
+
+
+
+
+
+
+
+//Next Round Funktionen ->
 function nextRound(){
   if(blackjackgame["isTurnsOver"] === true){
-    console.log("nextRound()")
+    console.log("nextRound()");
+
+  wager.value = safewager;
   resetDealer(DEALER);
   resetPlayer(PLAYER);
-  let winmessage = document.querySelector("#winner")as HTMLSpanElement;
+
+  Winningsspan.innerHTML = "0";
+  Winningsspan.style.color = "white";
+  
+  wager.readOnly = false;
+
+
+  const winmessage = document.querySelector("#winner")as HTMLSpanElement;
   winmessage.innerHTML = "The Game";
   winmessage.style.color = "white";
+
   blackjackgame.cards= ["HerzA", "Herz2", "Herz3", "Herz4", "Herz5", "Herz6", "Herz7", "Herz8", "Herz9", "Herz10", "HerzJ", "HerzQ", "HerzK", 
   "KreuzA","Kreuz2","Kreuz3","Kreuz4","Kreuz5","Kreuz6","Kreuz7","Kreuz8","Kreuz9","Kreuz10","KreuzJ","KreuzQ","KreuzK",
   "PikA","Pik2","Pik3","Pik4","Pik5","Pik6","Pik7","Pik8","Pik9","Pik10","PikJ","PikQ","PikK",
   "KaroA","Karo2","Karo3","Karo4","Karo5","Karo6","Karo7","Karo8","Karo9","Karo10","KaroJ","KaroQ","KaroK"];
+
   blackjackgame["PlayerHit"] = false;
   blackjackgame["isTurnsOver"] = false;
   blackjackgame["isStand"] = false;
@@ -413,7 +498,6 @@ function nextRound(){
   }
   }
   function resetPlayer(activePlayer: IPlayer){
-    console.log("resetPlayer");
   activePlayer["score"]= 0;
   //let cardImage = document.createElement("img");
   //updateWertPlayer(card, PLAYER);
@@ -428,7 +512,6 @@ function nextRound(){
   
   
   function resetDealer(activePlayer: IDealer){
-    console.log("resetDealer");
     activePlayer["score"]= 0;
    // let cardImage = document.createElement("img");
     //updateWertPlayer(card, PLAYER);
