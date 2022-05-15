@@ -9,12 +9,12 @@ const nextroundbutton = document.getElementById("NextRoundButton")as HTMLButtonE
   nextroundbutton.addEventListener("click", nextRound);
   
 //Funktion um eine neue Runde zu starten.
-function nextRound(){
+export function nextRound(){
 //Eine neue Runde kann nur gestartet werden, wenn die vorherige beendet ist.
   if(blackjack["isTurnsOver"] === true){
     //Überschreibt den Einsatz mit dem Standard Einsatz.
   wager.value = safewager;
-
+//Ändert die Zugriffbarkeit des inputs Wager
   wager.readOnly = false;
   //Funktionen, welche die Seiten des Spielers und des Dealers zurücksetzten
   resetDealer(DEALER);

@@ -77,16 +77,12 @@ height: 250px;
 
 
 .Buttons {
-  /*  flex-direction: column;
-    height: 100vh;
-    width: 5.5cm;*/
+
     position: absolute;
     left: calc(50% - 2.75cm);
     margin-top: 60px;
     display: flex;
     padding: 5px;
-   /*flex-wrap: wrap;*/
-  /* justify-content: space-evenly;*/
     flex-direction: column;
 
 
@@ -111,17 +107,6 @@ height: 250px;
 .ChooseButtons:hover {
     cursor: pointer;
 }
-
-/*Spielkartengröße (Rückseite)*/
-/*.Card {
-    background-color: red;
-    border: 6px solid white;
-    border-radius: 5px;
-    box-shadow: 0 0 1px #000;
-    height: 212px;
-
-    width: 158px;
-}*/
 
 
 #PlayerWertBJ {
@@ -192,20 +177,5 @@ padding-top: 10px;
     
     
    
-}
-
-.CashTitel{
-    text-align: left;
-    
-}
-
-#Cash{
-text-align: left ;
-}
-
-#Winnings{
-    text-align: left;
-
-
 }
 

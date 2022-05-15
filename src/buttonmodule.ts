@@ -2,19 +2,9 @@ import { blackjack, DEALER, IDealer, PLAYER, randomcard, wager } from "./index";
 import { showDealerScore, showPlayerScore, updateWertDealer, updateWertPlayer } from "./scoremodule";
 import { showCardDealer, showCardPlayer } from "./showCards";
 import { CalculateWinner, CalculateWinnings, showWinner } from "./winnermodul";
-
-  //Aufrufe der Buttons
- const hitbutton = document.getElementById("HitButton")as HTMLButtonElement;
-  hitbutton.addEventListener("click", blackjackHit);
-  
- const standbutton = document.getElementById("StandButton")as HTMLButtonElement;
-  standbutton.addEventListener("click",blackjackStand);
-  
-  const doubledownbutton = document.getElementById("DoubleDownButton")as HTMLButtonElement;
-  doubledownbutton.addEventListener("click", blackjackdoubledown);
   
   //Funktion für den Hit Button, welche beim Klick ausgeführt wird.
-function blackjackHit() {
+export function blackjackHit() {
   console.log("hallo")
   //Kann nur ausgeführt werden, wenn der boolean isStand false ist. Also somit die Funtkion blackjackStand noch nocht ausgeführt wurde.
   if(blackjack["isStand"] === false){
@@ -24,7 +14,6 @@ function blackjackHit() {
     wager.readOnly = true;
     //Boolean welche auf true gesetzt werden um einen reiblungslosen Ablauf gewährleisten zu können.
     blackjack["PlayerHit"] = true;
-    blackjack["setwager"] = true;
     //Funktion die die Karten des Spielers anzeigt
     showCardPlayer(card, PLAYER);
     //Funktion, welche den Wert der Karten des Spielers berechnet.
@@ -35,7 +24,7 @@ function blackjackHit() {
 }
 
 //Funktion, die beim Klick auf den doubledown Button ausgeführt wird. 
-function blackjackdoubledown(){
+export function blackjackdoubledown(){
   //Kann nur ausgeführt werden, wenn die blackjackstand Funktion noch nicht und die blackHit schon ausgeführt wurden.
   if (blackjack["isStand"] === false && blackjack["PlayerHit"] === true) {
     //Gibt eine zufällige Position aus dem Array wieder.
